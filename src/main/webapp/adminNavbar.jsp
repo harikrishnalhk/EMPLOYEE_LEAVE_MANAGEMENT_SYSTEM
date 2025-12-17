@@ -86,7 +86,7 @@
         <a href="addEmployee.jsp">Add Employee</a>
         <a href="viewEmployees">View Employees</a>
         <a href="adminLeaves">Leave Requests</a>
-        <a href="adminLogin.jsp" class="logout">Logout</a>
+        <a href="logout.jsp?role=admin" class="logout">Logout</a>
     </div>
 
 </div>

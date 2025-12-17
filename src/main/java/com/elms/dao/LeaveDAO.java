@@ -1,6 +1,7 @@
 package com.elms.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -75,8 +76,8 @@ public class LeaveDAO {
 
         ps3.setString(1, email);
         ps3.setString(2, type);
-        ps3.setString(3, fromDate);
-        ps3.setString(4, toDate);
+        ps3.setDate(3, Date.valueOf(start));
+        ps3.setDate(4, Date.valueOf(end));
         ps3.setString(5, reason);
         ps3.executeUpdate();
 
