@@ -15,17 +15,16 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Runtime stage
-FROM eclipse-temurin:17-jre
+FROM tomcat:10.1-jdk17
 
-# Set working directory
-WORKDIR /app
+# Remove default webapps
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy the built WAR and webapp-runner from build stage
-COPY --from=build /app/target/elms-1.0.war ./app.war
-COPY --from=build /app/target/dependency/webapp-runner.jar ./webapp-runner.jar
+# Copy the built WAR file from build stage
+COPY --from=build /app/target/elms-1.0.war /usr/local/tomcat/webapps/ROOT.war
 
-# Expose port (Render will set PORT)
+# Expose port (Render will map it)
 EXPOSE 8080
 
-# Start the app using webapp-runner
-CMD ["sh", "-c", "java -jar webapp-runner.jar --port $PORT app.war"]
+# Start Tomcat
+CMD ["catalina.sh", "run"]
