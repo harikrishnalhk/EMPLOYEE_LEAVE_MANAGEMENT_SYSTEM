@@ -82,7 +82,7 @@
 
     <!-- RIGHT -->
     <div class="nav-right">
-        <a href="adminDashboard.jsp">Home</a>
+        <a href="adminDashboard">Home</a>
         <a href="addEmployee.jsp">Add Employee</a>
         <a href="viewEmployees">View Employees</a>
         <a href="adminLeaves">Leave Requests</a>

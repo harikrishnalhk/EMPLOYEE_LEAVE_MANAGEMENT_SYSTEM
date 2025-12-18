@@ -1,4 +1,5 @@
 com\elms\admin\RejectLeaveServlet.class
+com\elms\admin\DeleteEmployeeServlet.class
 com\elms\model\Leave.class
 com\elms\employee\MyLeavesServlet.class
 com\elms\admin\LeaveActionServlet.class
@@ -10,6 +11,7 @@ com\elms\admin\AdminLeavesServlet.class
 com\elms\admin\ViewEmployeesServlet.class
 com\elms\dao\EmployeeDAO.class
 com\elms\employee\LoginServlet.class
+com\elms\admin\AdminDashboardServlet.class
 com\elms\dao\LeaveDAO.class
 com\elms\employee\ApplyLeaveServlet.class
 com\elms\util\DBConnection.class

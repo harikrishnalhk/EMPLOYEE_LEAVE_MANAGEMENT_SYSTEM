@@ -10,6 +10,8 @@ public class Leave {
     private String toDate;
     private String reason;
     private String status;
+    private String duration; // FULL, FIRST, SECOND
+    private String documentPath;
 
     // 👉 ADD THIS FIELD HERE (WITH OTHER FIELDS)
     private String rejectionReason;
@@ -78,5 +80,21 @@ public class Leave {
 
     public void setRejectionReason(String rejectionReason) {
         this.rejectionReason = rejectionReason;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getDocumentPath() {
+        return documentPath;
+    }
+
+    public void setDocumentPath(String documentPath) {
+        this.documentPath = documentPath;
     }
 }

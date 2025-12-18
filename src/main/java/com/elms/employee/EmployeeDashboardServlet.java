@@ -33,8 +33,8 @@ public class EmployeeDashboardServlet extends HttpServlet {
             // ====================================================
             // ✅ THIS IS THE EXACT PLACE WHERE COUNTS UPDATE
             // ====================================================
-            int sickLeaves = EmployeeDAO.getSickLeaves(email);
-            int casualLeaves = EmployeeDAO.getCasualLeaves(email);
+            double sickLeaves = EmployeeDAO.getSickLeaves(email);
+            double casualLeaves = EmployeeDAO.getCasualLeaves(email);
 
             req.setAttribute("sick", sickLeaves);
             req.setAttribute("casual", casualLeaves);

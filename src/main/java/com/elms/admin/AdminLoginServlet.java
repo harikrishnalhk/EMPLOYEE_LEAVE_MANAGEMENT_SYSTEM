@@ -22,7 +22,7 @@ public class AdminLoginServlet extends HttpServlet {
         if (ADMIN_USER.equals(username) && ADMIN_PASS.equals(password)) {
             HttpSession session = req.getSession();
             session.setAttribute("admin", "true");
-            res.sendRedirect("adminDashboard.jsp");
+            res.sendRedirect("adminDashboard");
 
         } else {
             req.setAttribute("error", "Invalid Admin Credentials");

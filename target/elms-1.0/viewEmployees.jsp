@@ -4,6 +4,10 @@
         return;
     }
 %>
+<%
+    String success = request.getParameter("success");
+    String error = request.getParameter("error");
+%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
@@ -16,18 +20,21 @@
 /* ===== PAGE BACKGROUND ===== */
 body{
     font-family: "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(120deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
+    margin: 0;
+    padding-top: 80px; /* For navbar */
 }
 
 /* ===== CARD ===== */
 .card{
-    width: 88%;
+    width: 90%;
+    max-width: 1200px;
     margin: 40px auto;
     background: #ffffff;
-    padding: 25px;
-    border-radius: 14px;
-    box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     animation: fadeUp 0.8s ease;
 }
 
@@ -46,40 +53,44 @@ body{
 /* ===== TITLE ===== */
 h2{
     text-align: center;
-    margin-bottom: 25px;
-    color: #2c3e50;
-    font-size: 26px;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 28px;
+    font-weight: 600;
 }
 
 /* ===== TABLE ===== */
 table{
     width:100%;
     border-collapse: collapse;
-    overflow: hidden;
     border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 /* ===== HEADER ===== */
 th{
-    background: linear-gradient(90deg, #2c3e50, #34495e);
+    background: linear-gradient(90deg, #667eea, #764ba2);
     color: white;
-    padding: 14px;
-    font-size: 15px;
+    padding: 15px;
+    font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-weight: 600;
 }
 
 /* ===== CELLS ===== */
 td{
-    padding: 14px;
+    padding: 15px;
     text-align: center;
-    font-size: 14.5px;
-    color: #2c3e50;
+    font-size: 15px;
+    color: #333;
+    border-bottom: 1px solid #eee;
 }
 
 /* ===== ROW STYLING ===== */
 tr:nth-child(even){
-    background: #f7f9fc;
+    background: #f8f9fa;
 }
 
 tr:nth-child(odd){
@@ -88,20 +99,85 @@ tr:nth-child(odd){
 
 /* ===== HOVER EFFECT ===== */
 tbody tr{
-    transition: all 0.25s ease;
+    transition: all 0.3s ease;
 }
 
 tbody tr:hover{
-    background: #eef2ff;
+    background: #e9ecef;
     transform: scale(1.01);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 /* ===== EMPTY STATE ===== */
 .no-data{
     text-align: center;
-    padding: 20px;
-    font-size: 16px;
-    color: #555;
+    padding: 40px;
+    font-size: 18px;
+    color: #666;
+    font-style: italic;
+}
+
+/* ===== DELETE BUTTON ===== */
+.delete-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+/* ===== MESSAGES ===== */
+.success, .error {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    animation: fadeIn 0.6s ease;
+}
+
+.success {
+    color: #155724;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+.error {
+    color: #721c24;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+@keyframes fadeIn{
+    from{opacity: 0; transform: translateY(10px);}
+    to{opacity: 1; transform: translateY(0);}
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .card {
+        width: 95%;
+        padding: 20px;
+    }
+    
+    th, td {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    table {
+        font-size: 14px;
+    }
 }
 </style>
 
@@ -115,6 +191,13 @@ tbody tr:hover{
 <div class="card">
     <h2>Employee List</h2>
 
+    <% if (success != null) { %>
+        <p class="success"><%= success %></p>
+    <% } %>
+    <% if (error != null) { %>
+        <p class="error"><%= error %></p>
+    <% } %>
+
     <table>
         <tr>
             <th>Name</th>
@@ -122,6 +205,7 @@ tbody tr:hover{
             <th>Email</th>
             <th>Phone</th>
             <th>Gender</th>
+            <th>Actions</th>
         </tr>
 
         <c:forEach var="e" items="${employees}">
@@ -131,12 +215,18 @@ tbody tr:hover{
                 <td>${e.email}</td>
                 <td>${e.phone}</td>
                 <td>${e.gender}</td>
+                <td>
+                    <form action="deleteEmployee" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this employee? This action cannot be undone.');">
+                        <input type="hidden" name="email" value="${e.email}">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
 
         <c:if test="${empty employees}">
             <tr>
-                <td colspan="5" class="no-data">No Employees Found</td>
+                <td colspan="6" class="no-data">No Employees Found</td>
             </tr>
         </c:if>
     </table>

@@ -6,6 +6,7 @@ C:\Users\HarikrishnaLatkari\Downloads\ELMS\src\main\java\com\elms\model\Employee
 C:\Users\HarikrishnaLatkari\Downloads\ELMS\src\main\java\com\elms\employee\ApplyLeaveServlet.java
 C:\Users\HarikrishnaLatkari\Downloads\ELMS\src\main\java\com\elms\employee\MyLeavesServlet.java
 C:\Users\HarikrishnaLatkari\Downloads\ELMS\src\main\java\com\elms\admin\AdminLeavesServlet.java
+C:\Users\HarikrishnaLatkari\Downloads\ELMS\src\main\java\com\elms\admin\DeleteEmployeeServlet.java
 C:\Users\HarikrishnaLatkari\Downloads\ELMS\src\main\java\com\elms\dao\EmployeeDAO.java
 C:\Users\HarikrishnaLatkari\Downloads\ELMS\src\main\java\com\elms\admin\RejectLeaveServlet.java
 C:\Users\HarikrishnaLatkari\Downloads\ELMS\src\main\java\com\elms\employee\LoginServlet.java
@@ -13,3 +14,4 @@ C:\Users\HarikrishnaLatkari\Downloads\ELMS\src\main\java\com\elms\admin\LeaveAct
 C:\Users\HarikrishnaLatkari\Downloads\ELMS\src\main\java\com\elms\employee\EmployeeDashboardServlet.java
 C:\Users\HarikrishnaLatkari\Downloads\ELMS\src\main\java\com\elms\model\Leave.java
 C:\Users\HarikrishnaLatkari\Downloads\ELMS\src\main\java\com\elms\admin\AdminLoginServlet.java
+C:\Users\HarikrishnaLatkari\Downloads\ELMS\src\main\java\com\elms\admin\AdminDashboardServlet.java

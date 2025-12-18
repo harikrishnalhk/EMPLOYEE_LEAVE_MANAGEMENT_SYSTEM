@@ -92,7 +92,7 @@ public class EmployeeDAO {
     /* =========================
        GET CASUAL LEAVES
        ========================= */
-    public static int getCasualLeaves(String email) throws Exception {
+    public static double getCasualLeaves(String email) throws Exception {
 
         Connection con = DBConnection.getConnection();
         PreparedStatement ps = con.prepareStatement(
@@ -102,9 +102,9 @@ public class EmployeeDAO {
 
         ResultSet rs = ps.executeQuery();
 
-        int casual = 0;
+        double casual = 0;
         if (rs.next()) {
-            casual = rs.getInt("casual_leaves");
+            casual = rs.getDouble("casual_leaves");
         }
 
         con.close();
@@ -114,7 +114,7 @@ public class EmployeeDAO {
     /* =========================
        GET SICK LEAVES
        ========================= */
-    public static int getSickLeaves(String email) throws Exception {
+    public static double getSickLeaves(String email) throws Exception {
 
         Connection con = DBConnection.getConnection();
         PreparedStatement ps = con.prepareStatement(
@@ -124,12 +124,34 @@ public class EmployeeDAO {
 
         ResultSet rs = ps.executeQuery();
 
-        int sick = 0;
+        double sick = 0;
         if (rs.next()) {
-            sick = rs.getInt("sick_leaves");
+            sick = rs.getDouble("sick_leaves");
         }
 
         con.close();
         return sick;
+    }
+
+    /* =========================
+       GET GENDER
+       ========================= */
+    public static String getGender(String email) throws Exception {
+
+        Connection con = DBConnection.getConnection();
+        PreparedStatement ps = con.prepareStatement(
+            "SELECT gender FROM employee WHERE email=?"
+        );
+        ps.setString(1, email);
+
+        ResultSet rs = ps.executeQuery();
+
+        String gender = null;
+        if (rs.next()) {
+            gender = rs.getString("gender");
+        }
+
+        con.close();
+        return gender;
     }
 }
